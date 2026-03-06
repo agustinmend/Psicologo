@@ -1,0 +1,42 @@
+.calendar-wrapper {
+  padding: 24px;
+  background-color: #ffffff;
+  height: 95vh;
+}
+
+.tarjeta-cita {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tarjeta-hora {
+  font-size: 0.75rem;
+  color: #4b5563;
+  margin-bottom: 2px;
+}
+
+.tarjeta-titulo {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Variantes de colores según Figma */
+.tarjeta-verde {
+  background-color: #dcfce7;
+  border-left: 4px solid #22c55e;
+}
+
+.tarjeta-azul {
+  background-color: #dbeafe;
+  border-left: 4px solid #3b82f6;
+}

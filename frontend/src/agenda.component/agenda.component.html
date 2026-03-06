@@ -1,0 +1,17 @@
+<div class="calendar-wrapper">
+  <full-calendar [options]="calendarOptions">
+    
+    <ng-template #eventContent let-arg>
+      
+      <div class="tarjeta-cita" 
+           [ngClass]="arg.event.extendedProps['colorType'] === 'verde' ? 'tarjeta-verde' : 'tarjeta-azul'">
+        
+        <div class="tarjeta-hora">{{ arg.timeText }}</div>
+        <div class="tarjeta-titulo">{{ arg.event.title }}</div>
+        
+      </div>
+      
+    </ng-template>
+
+  </full-calendar>
+</div>
