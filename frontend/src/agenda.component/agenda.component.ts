@@ -10,13 +10,13 @@ import { CrearCitaComponent } from '../crear-cita.component/crear-cita.component
 @Component({
   selector: 'app-agenda',
   standalone: true,
-  imports: [CommonModule, FullCalendarModule],
+  imports: [CommonModule, FullCalendarModule, CrearCitaComponent],
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.css'
 })
 export class AgendaComponent implements OnInit {
   private citasSvc = inject(CitasService);
-
+  mostrarModal : boolean= false
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, interactionPlugin],
     initialView: 'timeGridWeek',
@@ -36,4 +36,12 @@ export class AgendaComponent implements OnInit {
   async ngOnInit() {
     this.calendarOptions.events = await this.citasSvc.getCitasMock();
   }
+    procesarNuevaCita(datosCita: any) {
+    console.log('Datos interceptados del modal:', datosCita);
+    // TODO: Aquí deberás llamar a tu backend usando CitasService
+    // Ej: this.citasSvc.crearCita(datosCita);
+
+    // Cierra el modal tras recibir la data
+    this.mostrarModal = false; 
+    }
 }
