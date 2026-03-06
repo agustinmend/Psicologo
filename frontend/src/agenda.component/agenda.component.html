@@ -1,17 +1,35 @@
-<div class="calendar-wrapper">
-  <full-calendar [options]="calendarOptions">
-    
-    <ng-template #eventContent let-arg>
-      
-      <div class="tarjeta-cita" 
-           [ngClass]="arg.event.extendedProps['colorType'] === 'verde' ? 'tarjeta-verde' : 'tarjeta-azul'">
-        
-        <div class="tarjeta-hora">{{ arg.timeText }}</div>
-        <div class="tarjeta-titulo">{{ arg.event.title }}</div>
-        
-      </div>
-      
-    </ng-template>
+<div class="encabezado"></div>
+<div class="contenido">
+    <div class="perfil">
+        <div class="perfil__imagen">
+            <img src=""  alt="">    
+        </div>
+        <div class="perfil__nombre"> Raiden Makio</div>
+        <div class="perfil__subtitulo">
+            Descripcion
+        </div>
+        <div class="perfil__subtitulo">
+            Especialidades
+        </div>
+        <div class="perfil__subtitulo">
+            Ver reseñas
+        </div>        
+    </div>
+    <div class="calendar-wrapper">
+        <full-calendar [options]="calendarOptions">
+            
+            <ng-template #eventContent let-arg>
+            
+            <div class="tarjeta-cita" 
+                [ngClass]="arg.event.extendedProps['colorType'] === 'verde' ? 'tarjeta-verde' : 'tarjeta-azul'">
+                
+                <div class="tarjeta-hora">{{ arg.timeText }}</div>
+                <div class="tarjeta-titulo">{{ arg.event.title }}</div>
+                
+            </div>
+            
+            </ng-template>
 
-  </full-calendar>
+        </full-calendar>
+    </div>
 </div>

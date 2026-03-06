@@ -1,43 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
-/* frontend/src/styles.css */
+/* src/styles.css */
+:root {
+  /* Variables de superficie */
+  --bg-surface: #ffffff;
+  --bg-app: #f1f5f9; /* Color de fondo fuera de la tarjeta */
+  
+  /* Variables de Citas - Verde */
+  --cita-green-bg: #dcfce7;
+  --cita-green-border: #22c55e;
+  
+  /* Variables de Citas - Azul */
+  --cita-blue-bg: #eff6ff;
+  --cita-blue-border: #3b82f6;
 
-/* Reset básico para que la app ocupe el 100% de la pantalla */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Inter', system-ui, sans-serif; /* Usa la tipografía de tu Figma */
-  background-color: #f8fafc; /* Fondo general de la aplicación */
+  /* Texto */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  
+  /* Sombras y Radios */
+  --radius-lg: 12px;
+  --radius-md: 6px;
+  --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-/* ----------------------------------------------------
-   ANULAR ESTILOS BASE DE FULLCALENDAR
-   Si no pones esto, tu tarjeta se verá mal y con bordes extraños
-------------------------------------------------------- */
+/* Modificación global de FullCalendar (Obligatorio si usas la librería) */
+.fc {
+  --fc-border-color: #e2e8f0; /* Color de líneas más sutil */
+  --fc-today-bg-color: #f8fafc;
+  --fc-event-bg-color: transparent;
+  --fc-event-border-color: transparent;
+}
+/* Quitar borde a los eventos de FullCalendar para que tus tarjetas se vean limpias */
 .fc-v-event {
-  background: transparent !important;
+  background: none !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-.fc-timegrid-event-harness {
-  padding: 1px 4px; /* Separación entre el borde de la columna y la tarjeta */
-}
-
-.fc-toolbar-title {
-  text-transform: capitalize;
-  font-size: 1.5rem !important;
-  color: #1e293b;
-}
-
-/* Estilizar los botones del header para que no se vean genéricos */
-.fc .fc-button-primary {
-  background-color: white !important;
-  color: #475569 !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-}
-
-.fc .fc-button-primary:hover {
-  background-color: #f1f5f9 !important;
 }

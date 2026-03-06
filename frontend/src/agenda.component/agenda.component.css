@@ -1,24 +1,51 @@
 /* frontend/src/agenda.component/agenda.component.css */
+.encabezado {
+    height: 90px;
+    width: 100%;
+    margin-bottom: 5px;
+    background: #5FB862;
+}
+.contenido {
+    display: flex;
+    height: 700px;
+}
+
+.perfil {
+    margin-right: 50px;
+    height: 700px;
+    width: 40%;
+    background: rgba(50, 137, 171, 0.24);
+    text-align: center;
+    font-weight: bold;
+}
+.perfil__imagen {
+    border : 1px #FFFF solid;
+    margin : 20px;
+    height: 200px;   
+}
+.perfil__subtitulo {
+    color: #5FB862;
+}
+
 
 .calendar-wrapper {
   padding: 24px;
-  margin: 24px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  height: calc(100vh - 48px); /* Altura dinámica restando el margen */
+  /* El margen debe gestionarlo el layout padre, no el componente hijo. Lo eliminamos. */
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  height: 100%; /* Delegamos la altura al padre */
+  width: 100%;
   box-sizing: border-box;
+  margin-left: 20px;
 }
 
-/* ----------------------------------------------------
-   DISEÑO EXACTO DE LA TARJETA (TU FIGMA)
-------------------------------------------------------- */
 .tarjeta-cita {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   padding: 8px 10px;
   box-sizing: border-box;
   overflow: hidden;
@@ -32,7 +59,7 @@
 
 .tarjeta-hora {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 4px;
   font-weight: 500;
 }
@@ -40,19 +67,19 @@
 .tarjeta-titulo {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Colores de las tarjetas según tu diseño */
+/* Aplicación de Variables */
 .tarjeta-verde {
-  background-color: #dcfce7;
-  border-left: 4px solid #22c55e;
+  background-color: var(--cita-green-bg);
+  border-left: 4px solid var(--cita-green-border);
 }
 
 .tarjeta-azul {
-  background-color: #eff6ff;
-  border-left: 4px solid #3b82f6;
+  background-color: var(--cita-blue-bg);
+  border-left: 4px solid var(--cita-blue-border);
 }
