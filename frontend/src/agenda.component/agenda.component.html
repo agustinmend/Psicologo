@@ -15,21 +15,24 @@
             Ver reseñas
         </div>        
     </div>
-    <div class="calendar-wrapper">
-        <full-calendar [options]="calendarOptions">
-            
-            <ng-template #eventContent let-arg>
-            
-            <div class="tarjeta-cita" 
-                [ngClass]="arg.event.extendedProps['colorType'] === 'verde' ? 'tarjeta-verde' : 'tarjeta-azul'">
+    <div class="derecha">
+        <div class="calendar-wrapper">
+            <full-calendar [options]="calendarOptions">
                 
-                <div class="tarjeta-hora">{{ arg.timeText }}</div>
-                <div class="tarjeta-titulo">{{ arg.event.title }}</div>
+                <ng-template #eventContent let-arg>
                 
-            </div>
-            
-            </ng-template>
+                <div class="tarjeta-cita" 
+                    [ngClass]="arg.event.extendedProps['colorType'] === 'verde' ? 'tarjeta-verde' : 'tarjeta-azul'">
+                    
+                    <div class="tarjeta-hora">{{ arg.timeText }}</div>
+                    <div class="tarjeta-titulo">{{ arg.event.title }}</div>
+                    
+                </div>
+                
+                </ng-template>
 
-        </full-calendar>
+            </full-calendar>
+        </div>
+        <button class="agregar-cita">Agendar cita</button>
     </div>
 </div>

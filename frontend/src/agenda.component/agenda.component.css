@@ -9,7 +9,16 @@
     display: flex;
     height: 700px;
 }
-
+.derecha {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+.agregar-cita {
+    width: 50%;
+    height: 50 px;
+    background: #5FB862;
+}
 .perfil {
     margin-right: 50px;
     height: 700px;

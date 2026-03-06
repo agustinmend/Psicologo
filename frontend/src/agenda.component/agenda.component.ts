@@ -27,8 +27,8 @@ export class AgendaComponent implements OnInit {
       right: 'timeGridWeek'
     },
     buttonText: { today: 'Hoy', week: 'Semana' },
-    slotMinTime: '08:00:00',
-    slotMaxTime: '20:00:00',
+    slotMinTime: '14:00:00',
+    slotMaxTime: '21:00:00',
     allDaySlot: false,
     events: [] // Se limpia el eventContent, Angular se encarga en el HTML
   };
