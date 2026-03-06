@@ -1,5 +1,30 @@
-<div class="formulario">
-    <form action="">
-        
+<div class="modal-overlay" (click)="onCancelar()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <h2>Agendar nueva cita</h2>
+    
+    <form [formGroup]="citaForm" (ngSubmit)="onGuardar()">
+      <div class="form-group">
+        <label for="paciente">Paciente</label>
+        <input id="paciente" type="text" formControlName="paciente" placeholder="Nombre del paciente">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input id="fecha" type="date" formControlName="fecha">
+        </div>
+        <div class="form-group">
+          <label for="horaInicio">Inicio</label>
+          <input id="horaInicio" type="time" formControlName="horaInicio">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" (click)="onCancelar()">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="citaForm.invalid">Guardar Cita</button>
+      </div>
     </form>
+
+  </div>
 </div>

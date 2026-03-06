@@ -1,0 +1,25 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* Top, right, bottom, left a 0 */
+  background-color: rgba(15, 23, 42, 0.5); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de FullCalendar */
+}
+
+.modal-content {
+  background-color: var(--bg-surface, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  padding: 24px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Aplica CSS Grid o Flexbox para los campos internos, no uses <br> ni márgenes aleatorios */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}

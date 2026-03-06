@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { CitasService } from '../services/citas.services';
-
+import { CrearCitaComponent } from '../crear-cita.component/crear-cita.component';
 @Component({
   selector: 'app-agenda',
   standalone: true,

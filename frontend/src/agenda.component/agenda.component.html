@@ -33,6 +33,14 @@
 
             </full-calendar>
         </div>
-        <button class="agregar-cita">Agendar cita</button>
+
+        <button (click)="mostrarModal = true">Agregar Cita</button>
+
+        <app-cita-modal 
+        *ngIf="mostrarModal" 
+        (cerrar)="mostrarModal = false"
+        (guardar)="procesarNuevaCita($event)">
+        </app-cita-modal>
+
     </div>
 </div>
