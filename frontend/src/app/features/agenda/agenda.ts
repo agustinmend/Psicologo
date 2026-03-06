@@ -6,8 +6,22 @@ import { CalendarOptions, DateSelectArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { AppointmentService, CitaData } from '../../../services/apoinment.services';
+import { AppointmentService, CitaData } from '../../../services/appoinment.services';
+import esLocale from '@fullcalendar/core/locales/es'
 
+interface CitaResponse {
+  id : string
+  titulo : string
+  fecha : string
+  hora_inicio : string
+  hora_fin : string
+  descripcion : string
+  estado : string
+  paciente : {
+    nombre : string
+    telefono : string | null
+  }
+}
 @Component({
   selector: 'app-agenda',
   standalone: true,
@@ -43,6 +57,7 @@ export class AgendaComponent implements OnInit {
     selectable: true,
     select: this.handleDateSelect.bind(this),
     events: [],
+    locales: [esLocale],
     locale: 'es' // Calendario en español
   });
 
