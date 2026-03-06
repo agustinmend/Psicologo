@@ -1,42 +1,58 @@
+/* frontend/src/agenda.component/agenda.component.css */
+
 .calendar-wrapper {
   padding: 24px;
+  margin: 24px;
   background-color: #ffffff;
-  height: 95vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  height: calc(100vh - 48px); /* Altura dinámica restando el margen */
+  box-sizing: border-box;
 }
 
+/* ----------------------------------------------------
+   DISEÑO EXACTO DE LA TARJETA (TU FIGMA)
+------------------------------------------------------- */
 .tarjeta-cita {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  border-radius: 4px;
-  padding: 6px 8px;
+  border-radius: 6px;
+  padding: 8px 10px;
   box-sizing: border-box;
   overflow: hidden;
+  transition: transform 0.1s ease;
+}
+
+.tarjeta-cita:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 .tarjeta-hora {
   font-size: 0.75rem;
-  color: #4b5563;
-  margin-bottom: 2px;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 500;
 }
 
 .tarjeta-titulo {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #111827;
+  color: #0f172a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Variantes de colores según Figma */
+/* Colores de las tarjetas según tu diseño */
 .tarjeta-verde {
   background-color: #dcfce7;
   border-left: 4px solid #22c55e;
 }
 
 .tarjeta-azul {
-  background-color: #dbeafe;
+  background-color: #eff6ff;
   border-left: 4px solid #3b82f6;
 }

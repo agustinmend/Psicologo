@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+/* frontend/src/styles.css */
+
+/* Reset básico para que la app ocupe el 100% de la pantalla */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif; /* Usa la tipografía de tu Figma */
+  background-color: #f8fafc; /* Fondo general de la aplicación */
+}
+
+/* ----------------------------------------------------
+   ANULAR ESTILOS BASE DE FULLCALENDAR
+   Si no pones esto, tu tarjeta se verá mal y con bordes extraños
+------------------------------------------------------- */
+.fc-v-event {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.fc-timegrid-event-harness {
+  padding: 1px 4px; /* Separación entre el borde de la columna y la tarjeta */
+}
+
+.fc-toolbar-title {
+  text-transform: capitalize;
+  font-size: 1.5rem !important;
+  color: #1e293b;
+}
+
+/* Estilizar los botones del header para que no se vean genéricos */
+.fc .fc-button-primary {
+  background-color: white !important;
+  color: #475569 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.fc .fc-button-primary:hover {
+  background-color: #f1f5f9 !important;
+}
