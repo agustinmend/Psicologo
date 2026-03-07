@@ -19,27 +19,45 @@ export class CitasService {
   }
 
   async crearCita(datosFormulario: any) {
-    // 1. Mapeo estricto del Frontend a la Base de Datos
+    // 1. VALIDACIÓN ESTRÍCTA: Algoritmo de solapamiento en BD
+    const { data: choques, error: errorCheck } = await this.supabase
+      .from('citas')
+      .select('id')
+      .eq('psicologo_id', 1)
+      .eq('fecha', datosFormulario.fecha)
+      // Un solapamiento ocurre si: (InicioExistente < FinNuevo) AND (FinExistente > InicioNuevo)
+      .lt('hora_inicio', datosFormulario.horaFin)
+      .gt('hora_fin', datosFormulario.horaInicio);
+
+    if (errorCheck) {
+      console.error('Error al verificar disponibilidad:', errorCheck.message);
+      throw new Error('Fallo al comunicarse con la base de datos.');
+    }
+
+    // Si el arreglo 'choques' tiene al menos 1 elemento, el horario está ocupado.
+    if (choques && choques.length > 0) {
+      throw new Error('El horario seleccionado se cruza con una cita ya existente.');
+    }
+
+    // 2. Mapeo estricto del Frontend a la Base de Datos (Si la validación pasa)
     const payload = {
-      psicologo_id: 1, // Forzado por ahora para tu MVP de uso exclusivo del psicólogo
+      psicologo_id: 1, 
       titulo: datosFormulario.titulo,
       nombre_paciente: datosFormulario.nombrePaciente,
       fecha: datosFormulario.fecha,
       hora_inicio: datosFormulario.horaInicio,
       hora_fin: datosFormulario.horaFin,
       descripcion: datosFormulario.descripcion || null,
-      estado: 'programada' // Un estado lógico por defecto
+      estado: 'programada'
     };
 
-    // 2. Inserción en Supabase
+    // 3. Inserción en Supabase
     const { data, error } = await this.supabase
       .from('citas')
       .insert([payload])
-      .select(); // El .select() obliga a devolver el registro recién creado
+      .select(); 
 
-    // 3. Manejo explícito de errores
     if (error) {
-      console.error('Error insertando cita en Supabase:', error.message);
       throw new Error(error.message); 
     }
 

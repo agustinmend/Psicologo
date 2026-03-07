@@ -45,18 +45,19 @@ export class AgendaComponent implements OnInit {
 
   async procesarNuevaCita(datosCita: any) {
     try {
-      // 1. Guardar en Base de Datos
+      // 1. Intenta guardar en Base de Datos (incluye la validación de solapamiento)
       await this.citasSvc.crearCita(datosCita);
       
-      // 2. Cerrar el modal
+      // 2. Solo si no hubo errores, cerramos el modal
       this.mostrarModal = false; 
       
-      // 3. CRÍTICO: Refrescar el estado del calendario. 
-      // Si no haces esto, el usuario tendría que recargar la página (F5) para ver su nueva cita.
+      // 3. Refrescar el estado del calendario
       await this.cargarCitas();
       
-    } catch (error) {
-      alert('Error al guardar la cita en Supabase.');
+    } catch (error: any) {
+      // 4. Feedback directo al usuario.
+      // Aquí el alert mostrará "El horario seleccionado se cruza con una cita ya existente."
+      alert(error.message); 
     }
   }
   async cargarCitas() {
