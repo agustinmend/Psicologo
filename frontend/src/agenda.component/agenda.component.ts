@@ -39,25 +39,36 @@ export class AgendaComponent implements OnInit {
   };
 
   async ngOnInit() {
-    this.calendarOptions.events = await this.citasSvc.getCitasMock();
+    // Primera carga al abrir la página
+    await this.cargarCitas();
   }
+
   async procesarNuevaCita(datosCita: any) {
     try {
-      // Llamada asíncrona a la base de datos
-      const respuesta = await this.citasSvc.crearCita(datosCita);
-      console.log('Cita guardada en Supabase:', respuesta);
+      // 1. Guardar en Base de Datos
+      await this.citasSvc.crearCita(datosCita);
       
-      // Solo cerramos el modal si la inserción fue exitosa
+      // 2. Cerrar el modal
       this.mostrarModal = false; 
       
-      // Aquí debes recargar los eventos del calendario para que la nueva cita aparezca.
-      // Por ahora, simplemente podrías volver a llamar a tu método de obtención:
-      // this.calendarOptions.events = await this.citasSvc.getCitas(); 
+      // 3. CRÍTICO: Refrescar el estado del calendario. 
+      // Si no haces esto, el usuario tendría que recargar la página (F5) para ver su nueva cita.
+      await this.cargarCitas();
       
     } catch (error) {
-      // Mala práctica: Tragar errores silenciosamente.
-      // Aquí deberías mostrar un Toast o una alerta al usuario indicando el fallo.
-      alert('Error al guardar la cita. Revisa la consola para más detalles.');
+      alert('Error al guardar la cita en Supabase.');
     }
   }
+  async cargarCitas() {
+    try {
+      // Llamamos al backend real, no al mock
+      const eventosBD = await this.citasSvc.getCitas();
+      
+      // Actualizamos la propiedad events. Angular detectará el cambio y repintará FullCalendar.
+      this.calendarOptions.events = eventosBD;
+    } catch (error) {
+      console.error('Fallo al cargar la agenda de Supabase', error);
+    }
+  }
+
 }
