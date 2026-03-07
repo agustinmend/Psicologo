@@ -16,11 +16,12 @@ export class CrearCitaComponent {
 
   // Definición estricta del formulario
   citaForm = new FormGroup({
-    paciente: new FormControl('', Validators.required),
+    titulo: new FormControl('', Validators.required),
+    nombrePaciente: new FormControl('', Validators.required),
     fecha: new FormControl('', Validators.required),
     horaInicio: new FormControl('', Validators.required),
     horaFin: new FormControl('', Validators.required),
-    tipo: new FormControl('individual', Validators.required)
+    descripcion: new FormControl('') // Opcional, sin Validator.required
   });
 
   onGuardar() {

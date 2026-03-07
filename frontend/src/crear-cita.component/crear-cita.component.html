@@ -5,23 +5,25 @@
     
     <form [formGroup]="citaForm" (ngSubmit)="onGuardar()">
       <div class="form-group">
-        <label for="paciente">Paciente</label>
-        <input id="paciente" type="text" formControlName="paciente" placeholder="Nombre del paciente">
+        <label for="titulo">Título de la cita</label>
+        <input id="titulo" type="text" formControlName="titulo" placeholder="Ej. Terapia individual">
+      </div>
+
+      <div class="form-group">
+        <label for="nombrePaciente">Nombre del paciente</label>
+        <input id="nombrePaciente" type="text" formControlName="nombrePaciente" placeholder="Nombre completo">
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="titulo">Titulo</label>
-          <input id="titulo" type="text" formControlName="titulo">
-        </div>
-        <div class="form-group">
-          <label for="nombre-paciente">Nombre paciente</label>
-          <input id="nombre-paciente" type="text" formControlName="nombre-paciente">
-        </div>
-        <div class="form-group">
           <label for="fecha">Fecha</label>
           <input id="fecha" type="date" formControlName="fecha">
         </div>
+        <div class="form-group">
+          </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group">
           <label for="horaInicio">Inicio</label>
           <input id="horaInicio" type="time" formControlName="horaInicio">
@@ -30,10 +32,11 @@
           <label for="horaFin">Fin</label>
           <input id="horaFin" type="time" formControlName="horaFin">
         </div>
-        <div class="form-group">
-          <label for="descripcion">Descripcion</label>
-          <input id="descripcion" type="text" formControlName="descripcion">
-        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" rows="3" formControlName="descripcion" placeholder="Detalles de la cita..."></textarea>
       </div>
 
       <div class="modal-actions">
