@@ -1,10 +1,44 @@
 import { Injectable } from '@angular/core';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CitasService {
-  
+  private supabase: SupabaseClient;
+  constructor() {
+    const supabaseUrl = 'https://ubscjoigadsctakxigvv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVic2Nqb2lnYWRzY3Rha3hpZ3Z2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDIxNTUsImV4cCI6MjA4ODM3ODE1NX0.LjC-PU1vfR0jsnbU9QO3xA00QqldqykSpSIhs3hQCgo';
+    this.supabase = createClient(supabaseUrl, supabaseKey);
+  }
+
+  async crearCita(datosFormulario: any) {
+    // 1. Mapeo estricto del Frontend a la Base de Datos
+    const payload = {
+      psicologo_id: 1, // Forzado por ahora para tu MVP de uso exclusivo del psicólogo
+      titulo: datosFormulario.titulo,
+      nombre_paciente: datosFormulario.nombrePaciente,
+      fecha: datosFormulario.fecha,
+      hora_inicio: datosFormulario.horaInicio,
+      hora_fin: datosFormulario.horaFin,
+      descripcion: datosFormulario.descripcion || null,
+      estado: 'programada' // Un estado lógico por defecto
+    };
+
+    // 2. Inserción en Supabase
+    const { data, error } = await this.supabase
+      .from('citas')
+      .insert([payload])
+      .select(); // El .select() obliga a devolver el registro recién creado
+
+    // 3. Manejo explícito de errores
+    if (error) {
+      console.error('Error insertando cita en Supabase:', error.message);
+      throw new Error(error.message); 
+    }
+
+    return data;
+  }
   // Devuelve datos estáticos simulando una petición a BD
   async getCitasMock() {
     // Simulamos un leve retraso de red (opcional, pero realista)

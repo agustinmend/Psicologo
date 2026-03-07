@@ -30,18 +30,34 @@ export class AgendaComponent implements OnInit {
     slotMinTime: '14:00:00',
     slotMaxTime: '21:00:00',
     allDaySlot: false,
+
+    height: '100%', // Obliga al calendario a respetar el alto del contenedor
+    expandRows: true, // Estira las filas para rellenar huecos vacíos
+    dayHeaderFormat: { weekday: 'long', day: 'numeric' }, // Formato: "lunes 16"
+
     events: [] // Se limpia el eventContent, Angular se encarga en el HTML
   };
 
   async ngOnInit() {
     this.calendarOptions.events = await this.citasSvc.getCitasMock();
   }
-    procesarNuevaCita(datosCita: any) {
-    console.log('Datos interceptados del modal:', datosCita);
-    // TODO: Aquí deberás llamar a tu backend usando CitasService
-    // Ej: this.citasSvc.crearCita(datosCita);
-
-    // Cierra el modal tras recibir la data
-    this.mostrarModal = false; 
+  async procesarNuevaCita(datosCita: any) {
+    try {
+      // Llamada asíncrona a la base de datos
+      const respuesta = await this.citasSvc.crearCita(datosCita);
+      console.log('Cita guardada en Supabase:', respuesta);
+      
+      // Solo cerramos el modal si la inserción fue exitosa
+      this.mostrarModal = false; 
+      
+      // Aquí debes recargar los eventos del calendario para que la nueva cita aparezca.
+      // Por ahora, simplemente podrías volver a llamar a tu método de obtención:
+      // this.calendarOptions.events = await this.citasSvc.getCitas(); 
+      
+    } catch (error) {
+      // Mala práctica: Tragar errores silenciosamente.
+      // Aquí deberías mostrar un Toast o una alerta al usuario indicando el fallo.
+      alert('Error al guardar la cita. Revisa la consola para más detalles.');
     }
+  }
 }

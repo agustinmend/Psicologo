@@ -6,14 +6,21 @@
     background: #5FB862;
 }
 .contenido {
-    display: flex;
-    height: 700px;
+  display: flex;
+  height: calc(100vh - 80px); /* Ajusta los 80px según el alto de tu .encabezado */
+  gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
 }
+
 .derecha {
-    height: 100%;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ocupa el ancho restante a la derecha del perfil */
+  height: 100%; 
+  min-width: 0; /* Previene desbordamiento horizontal */
 }
+
 .agregar-cita {
     width: 50%;
     height: 50 px;
@@ -38,16 +45,21 @@
 
 
 .calendar-wrapper {
-  padding: 24px;
-  /* El margen debe gestionarlo el layout padre, no el componente hijo. Lo eliminamos. */
-  background-color: var(--bg-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  height: 100%; /* Delegamos la altura al padre */
-  width: 100%;
-  box-sizing: border-box;
-  margin-left: 20px;
+  flex: 1; /* Absorbe todo el espacio vertical sobrante */
+  min-height: 0; /* CRÍTICO: Sin esto, Flexbox permite que el calendario crezca al infinito */
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  padding: 16px;
+  margin-bottom: 16px; /* Deja espacio para el botón de abajo */
+  overflow: hidden; /* Corta de raíz cualquier desbordamiento interno */
 }
+::ng-deep .fc-col-header-cell-cushion {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
 
 .tarjeta-cita {
   display: flex;
