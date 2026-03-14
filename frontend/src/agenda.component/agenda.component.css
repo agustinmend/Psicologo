@@ -1,4 +1,3 @@
-/* frontend/src/agenda.component/agenda.component.css */
 .encabezado {
     height: 90px;
     width: 100%;
@@ -7,7 +6,7 @@
 }
 .contenido {
   display: flex;
-  height: calc(100vh - 80px); /* Ajusta los 80px según el alto de tu .encabezado */
+  height: calc(100vh - 80px);
   gap: 24px;
   padding: 24px;
   box-sizing: border-box;
@@ -16,9 +15,9 @@
 .derecha {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Ocupa el ancho restante a la derecha del perfil */
+  flex: 1;
   height: 100%; 
-  min-width: 0; /* Previene desbordamiento horizontal */
+  min-width: 0;
 }
 
 .agregar-cita {
@@ -42,17 +41,15 @@
 .perfil__subtitulo {
     color: #5FB862;
 }
-
-
 .calendar-wrapper {
-  flex: 1; /* Absorbe todo el espacio vertical sobrante */
-  min-height: 0; /* CRÍTICO: Sin esto, Flexbox permite que el calendario crezca al infinito */
+  flex: 1;
+  min-height: 0;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   padding: 16px;
-  margin-bottom: 16px; /* Deja espacio para el botón de abajo */
-  overflow: hidden; /* Corta de raíz cualquier desbordamiento interno */
+  margin-bottom: 16px;
+  overflow: hidden; 
 }
 ::ng-deep .fc-col-header-cell-cushion {
   text-transform: capitalize;
@@ -94,7 +91,6 @@
   text-overflow: ellipsis;
 }
 
-/* Aplicación de Variables */
 .tarjeta-verde {
   background-color: var(--cita-green-bg);
   border-left: 4px solid var(--cita-green-border);

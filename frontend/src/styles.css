@@ -1,35 +1,27 @@
-/* src/styles.css */
 :root {
-  /* Variables de superficie */
   --bg-surface: #ffffff;
-  --bg-app: #f1f5f9; /* Color de fondo fuera de la tarjeta */
+  --bg-app: #f1f5f9;
   
-  /* Variables de Citas - Verde */
   --cita-green-bg: #dcfce7;
   --cita-green-border: #22c55e;
   
-  /* Variables de Citas - Azul */
   --cita-blue-bg: #eff6ff;
   --cita-blue-border: #3b82f6;
 
-  /* Texto */
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   
-  /* Sombras y Radios */
   --radius-lg: 12px;
   --radius-md: 6px;
   --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-/* Modificación global de FullCalendar (Obligatorio si usas la librería) */
 .fc {
-  --fc-border-color: #e2e8f0; /* Color de líneas más sutil */
+  --fc-border-color: #e2e8f0;
   --fc-today-bg-color: #f8fafc;
   --fc-event-bg-color: transparent;
   --fc-event-border-color: transparent;
 }
-/* Quitar borde a los eventos de FullCalendar para que tus tarjetas se vean limpias */
 .fc-v-event {
   background: none !important;
   border: none !important;

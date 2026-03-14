@@ -30,42 +30,30 @@ export class AgendaComponent implements OnInit {
     slotMinTime: '14:00:00',
     slotMaxTime: '21:00:00',
     allDaySlot: false,
+    height: '100%',
+    expandRows: true,
+    dayHeaderFormat: { weekday: 'long', day: 'numeric' },
 
-    height: '100%', // Obliga al calendario a respetar el alto del contenedor
-    expandRows: true, // Estira las filas para rellenar huecos vacíos
-    dayHeaderFormat: { weekday: 'long', day: 'numeric' }, // Formato: "lunes 16"
-
-    events: [] // Se limpia el eventContent, Angular se encarga en el HTML
+    events: []
   };
 
   async ngOnInit() {
-    // Primera carga al abrir la página
     await this.cargarCitas();
   }
 
   async procesarNuevaCita(datosCita: any) {
     try {
-      // 1. Intenta guardar en Base de Datos (incluye la validación de solapamiento)
       await this.citasSvc.crearCita(datosCita);
-      
-      // 2. Solo si no hubo errores, cerramos el modal
       this.mostrarModal = false; 
-      
-      // 3. Refrescar el estado del calendario
       await this.cargarCitas();
       
     } catch (error: any) {
-      // 4. Feedback directo al usuario.
-      // Aquí el alert mostrará "El horario seleccionado se cruza con una cita ya existente."
       alert(error.message); 
     }
   }
   async cargarCitas() {
     try {
-      // Llamamos al backend real, no al mock
       const eventosBD = await this.citasSvc.getCitas();
-      
-      // Actualizamos la propiedad events. Angular detectará el cambio y repintará FullCalendar.
       this.calendarOptions.events = eventosBD;
     } catch (error) {
       console.error('Fallo al cargar la agenda de Supabase', error);
