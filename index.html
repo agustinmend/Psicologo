@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calendario</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="index.js" defer type="module"></script>
+</head>
+<body>
+    <div class="encabezado"></div>
+    <div id="calendario"></div>
+    <template id="formulario-crear-cita">
+        <div class="modal">
+            <div class="modal__contenido">
+                <form class="modal__formulario">
+                    <h2 class="modal__titulo">Crear cita</h2>
+                    <div class="modal__campo">
+                        <label class="modal__etiqueta">Nombre del Paciente</label>
+                        <input type="text" class="modal__entrada" name="nombre_paciente" required>
+                    </div>
+                    <div class="modal__campo">
+                        <label class="modal__etiqueta">Fecha</label>
+                        <input type="text" class="modal__entrada--lectura" name="fecha" readonly>
+                    </div>
+                    <div class="modal__campo">
+                        <label class="modal__etiqueta">Horario</label>
+                        <input type="text" class="modal__entrada--lectura" name="horario" readonly>
+                    </div>
+                    <div class="modal__campo">
+                        <label class="modal__etiqueta">Descripcion</label>
+                        <input type="text" class="modal__entrada modal__entrada--descripcion" name="descripcion">
+                    </div>
+                    <div class="modal__acciones">
+                        <button type="button" class="modal__boton">Cancelar</button>
+                        <button type="submit" class="modal__boton">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+    <template id="detalle-cita">
+        <div class="modal">
+            <div class="modal__contenido">
+                <h2>Detalle Cita</h2>
+                <p><strong>Paciente:</strong> <span id="detalle-paciente"></span></p>
+                <p><strong>Fecha:</strong> <span id="detalle-fecha"></span></p>
+                <p><strong>Hora:</strong> <span id="detalle-hora"></span></p>
+                <p><strong>Estado:</strong> <span id="detalle-estado"></span></p>
+                <p><strong>Descripción:</strong> <span id="detalle-descripcion"></span></p>
+                <div class="modal__acciones">
+                    <button id="btn-asistio">Asistió</button>
+                    <button id="btn-no-asistio">No asistió</button>
+                    <button id="btn-editar">Editar</button>
+                    <button id="btn-cancelar">Cancelar Cita</button>
+                    <button id="btn-cerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="buscador">
+        <input type="text" id="input-busqueda" placeholder="Buscar paciente...">
+        <button id="btn-buscar">Buscar</button>
+    </div>
+    <div class="resultados">
+        <h3>Resultados</h3>
+        <div id="lista-resultados"></div>
+    </div>
+</body>
+</html>
