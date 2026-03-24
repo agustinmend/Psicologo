@@ -64,13 +64,14 @@ Sistema web para la gestión digital de turnos de un consultorio psicológico, p
 |------|------------|----------------|
 | Frontend | HTML5, CSS3, JavaScript (ES Modules) | – |
 | UI Components | FullCalendar | 6.1.20, con plugins timeGrid, dayGrid |
-| Estilos | CSS custom + Google Fonts (Inter) | – |
-| Backend | Supabase | Postgres 15, API REST automática |
-| Cliente Supabase | `@supabase/supabase-js` | v2, CDN |
+| Estilos | CSS + Google Fonts (Inter) | – |
+| Backend | Supabase | Postgres |
+| Cliente Supabase | `@supabase/supabase-js` | CDN |
 | Control de versiones | Git + GitHub | Repositorio público |
 
 
 ### 2.3 Modelo de Datos
+<img width="1008" height="584" alt="image" src="https://github.com/user-attachments/assets/b098d27a-713a-44ca-ac2c-198c82a23786" />
 
 ### 2.4 "API" Interna (Servicios)
 Todas las funciones están en `cita-servicio.js`:
