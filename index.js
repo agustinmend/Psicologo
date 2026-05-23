@@ -1,4 +1,16 @@
 import { verificarSolapamiento, guardarCita, obtenerCitas, eliminarCita, actualizarCita } from "./service/cita-servicio.js"
+
+function obtenerColorPorEstado(estado) {
+    if (estado === 'asistio') return '#4CAF50'
+    if (estado === 'no_asistio') return '#f44336'
+    return '#3788d8'
+}
+
+function actualizarColorEvento(evento) {
+    const estado = evento.extendedProps.estado
+    evento.setProp('backgroundColor', obtenerColorPorEstado(estado))
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     const ID_Psicologo = 1
     let seleccionActual = null
@@ -239,14 +251,5 @@ document.addEventListener('DOMContentLoaded', async function() {
             `
             listaResultados.appendChild(div)
         });
-    }
-    function actualizarColorEvento(evento) {
-        const estado = evento.extendedProps.estado
-        evento.setProp('backgroundColor', obtenerColorPorEstado(estado))
-    }
-    function obtenerColorPorEstado(estado) {
-        if (estado === 'asistio') return '#4CAF50'
-        if (estado === 'no_asistio') return '#f44336'
-        return '#3788d8'
     }
 })

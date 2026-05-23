@@ -86,9 +86,10 @@ html,body {
 }
 
 .modal__boton:last-child {
-    background: #3289AB;
-    color: white;
+    background: #256D85;
+    color: #fff;
 }
+
 .resultados {
     max-width: 600px;
     margin: 20px auto;
