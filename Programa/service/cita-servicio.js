@@ -1,4 +1,4 @@
-import { supabase } from "../api/supabase.js";
+import { supabase } from "../config/supabase.js";
 export async function obtenerCitas() {
     const {data, error} = await supabase.from('citas').select('*')
     if(error) {
