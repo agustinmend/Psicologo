@@ -141,10 +141,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             e.preventDefault()
             const nombrePaciente = inputPaciente.value.trim()
             try {
-                if (!nombrePaciente) {
-                    alert('Nombre obligatorio')
-                    return
-                }
                 const ocupado = await verificarSolapamiento(
                     seleccion.fecha,
                     seleccion.horaInicio,
