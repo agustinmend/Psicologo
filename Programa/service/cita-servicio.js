@@ -65,3 +65,13 @@ export function verificarSolapamientoMemoria(citas, fecha, horaInicio, horaFin) 
         horaFin > cita.hora_inicio
     );
 }
+
+export function validarDatosCita(fecha, horaInicio, horaFin, nombrePaciente) {
+    if (!nombrePaciente || nombrePaciente.trim() === '') {
+        throw new Error('El nombre del paciente es obligatorio.');
+    }
+    if (horaInicio >= horaFin) {
+        throw new Error('La hora de inicio debe ser anterior a la hora de fin.');
+    }    
+    return true;
+}
