@@ -2,7 +2,7 @@ jest.mock('../config/supabase.js', () => ({
     supabase: {} 
 }), { virtual: true });
 
-import { buscarCitasPorNombre, verificarSolapamientoMemoria } from './cita-servicio.js';
+import { buscarCitasPorNombre, verificarSolapamientoMemoria, validarDatosCita } from './cita-servicio.js';
 describe('HU-05: Búsqueda de turnos', () => {
     const mockCitasMemoria = [
         { id: 1, nombre_paciente: 'Carlos Mendoza' },
@@ -30,5 +30,19 @@ describe('HU-02: Validación de solapamiento de turnos', () => {
     test('VerificarSolapamientoMemoria_HorarioLibre_RetornaFalse', () => {
         const ocupado = verificarSolapamientoMemoria(mockCitasMemoria, '2026-06-20', '16:00', '17:00');
         expect(ocupado).toBe(false);
+    });
+});
+
+describe('HU-02: Validación de datos de la cita', () => {
+    test('ValidarDatosCita_FaltanDatosObligatorios_LanzaError', () => {
+        expect(() => {
+            validarDatosCita('2026-06-20', '15:00', '16:00', '');
+        }).toThrow('El nombre del paciente es obligatorio.');
+    });
+
+    test('ValidarDatosCita_HoraInicioMayorAHoraFin_LanzaError', () => {
+        expect(() => {
+            validarDatosCita('2026-06-20', '16:00', '15:00', 'Juan Perez');
+        }).toThrow('La hora de inicio debe ser anterior a la hora de fin.');
     });
 });
