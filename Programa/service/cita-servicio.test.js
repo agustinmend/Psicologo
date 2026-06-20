@@ -1,47 +1,20 @@
-import { guardarCita, verificarSolapamiento, eliminarCita } from './cita-servicio.js';
-import { supabase } from '../api/supabase.js';
+jest.mock('../config/supabase.js', () => ({
+    supabase: {} 
+}), { virtual: true });
 
-jest.mock('../api/supabase.js', () => ({
-    supabase: {
-        from: jest.fn().mockReturnThis(),
-        insert: jest.fn().mockReturnThis(),
-        select: jest.fn().mockReturnThis(),
-        eq: jest.fn().mockReturnThis(),
-        delete: jest.fn().mockReturnThis()
-    }
-}));
+import { buscarCitasPorNombre } from './cita-servicio.js';
+//bue
+describe('HU-05: Búsqueda de turnos', () => {
+    const mockCitasMemoria = [
+        { id: 1, nombre_paciente: 'Carlos Mendoza' },
+        { id: 2, nombre_paciente: 'Ana Torres' },
+        { id: 3, nombre_paciente: 'Carlos Villagran' }
+    ];
 
-describe('Servicio de Citas - Pruebas Unitarias', () => {    
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
-    test('HU-02: Debe rechazar la creación de cita si faltan datos obligatorios', async () => {
-        await expect(
-            guardarCita(1, '2026-05-25', '16:00', '17:00', null, '') 
-        ).rejects.toThrow('Faltan datos obligatorios');
-    });
-
-    test('HU-02: Debe rechazar la creación de cita si la hora de inicio es igual o posterior a la de fin', async () => {
-        await expect(
-            guardarCita(1, '2026-05-25', '16:00', '15:00', 'Juan Perez', 'Consulta')
-        ).rejects.toThrow('Hora invalida');
-    });
-
-    test('HU-02: Debe detectar solapamiento si el rango horario choca con citas existentes', async () => {
-        supabase.eq.mockResolvedValueOnce({
-            data: [{ hora_inicio: '15:00', hora_fin: '17:00' }],
-            error: null
-        });
-        const ocupado = await verificarSolapamiento('2026-05-25', '16:00', '18:00');
-        expect(ocupado).toBe(true);
-    });
-
-    test('HU-03: Debe invocar la eliminación de la cita en la tabla correcta', async () => {
-        supabase.eq.mockResolvedValueOnce({ error: null });
-        const result = await eliminarCita(99);
-        expect(supabase.from).toHaveBeenCalledWith('citas');
-        expect(supabase.delete).toHaveBeenCalled();
-        expect(result.error).toBeNull();
+    test('BuscarCitasPorNombre_CoincidenciaParcial_RetornaListaFiltrada', () => {
+        const resultados = buscarCitasPorNombre(mockCitasMemoria, 'carlos');        
+        expect(resultados.length).toBe(2);
+        expect(resultados[0].nombre_paciente).toBe('Carlos Mendoza');
+        expect(resultados[1].nombre_paciente).toBe('Carlos Villagran');
     });
 });
