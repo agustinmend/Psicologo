@@ -140,52 +140,57 @@ document.addEventListener('DOMContentLoaded', async function() {
         formulario.addEventListener('submit', async (e) => {
             e.preventDefault()
             const nombrePaciente = inputPaciente.value.trim()
-            if (!nombrePaciente) {
-                alert('Nombre obligatorio')
-                return
-            }
-            const ocupado = await verificarSolapamiento(
-                seleccion.fecha,
-                seleccion.horaInicio,
-                seleccion.horaFin
-            )
-            if (ocupado) {
-                alert('Horario ocupado')
-                return
-            }
-            const res = await guardarCita(
-                ID_Psicologo,
-                seleccion.fecha,
-                seleccion.horaInicio,
-                seleccion.horaFin,
-                nombrePaciente,
-                inputDescripcion.value.trim()
-            )
-            if (res.error) {
-                alert('Error al guardar')
-                return
-            }
-            const nuevaCitaBD =res.data[0]
-            calendario.addEvent({
-                id: nuevaCitaBD.id,
-                title: 'Cita con ' + nombrePaciente,
-                start: seleccion.startIso,
-                end: seleccion.endIso,
-                extendedProps: {
-                    descripcion: inputDescripcion.value.trim(),
-                    estado: 'programado',
-                    nombre: nombrePaciente
+            try {
+                if (!nombrePaciente) {
+                    alert('Nombre obligatorio')
+                    return
                 }
-            })
-            citas.push({
-                id: nuevaCitaBD.id,
-                nombre_paciente: nombrePaciente,
-                fecha: seleccion.fecha,
-                hora_inicio: seleccion.horaInicio,
-                hora_fin: seleccion.horaFin
-            });
-            modal.remove()
-            calendario.unselect()
+                const ocupado = await verificarSolapamiento(
+                    seleccion.fecha,
+                    seleccion.horaInicio,
+                    seleccion.horaFin
+                )
+                if (ocupado) {
+                    alert('Horario ocupado')
+                    return
+                }
+                const res = await guardarCita(
+                    ID_Psicologo,
+                    seleccion.fecha,
+                    seleccion.horaInicio,
+                    seleccion.horaFin,
+                    nombrePaciente,
+                    inputDescripcion.value.trim()
+                )
+                if (res.error) {
+                    alert('Error al guardar')
+                    return
+                }
+                const nuevaCitaBD =res.data[0]
+                calendario.addEvent({
+                    id: nuevaCitaBD.id,
+                    title: 'Cita con ' + nombrePaciente,
+                    start: seleccion.startIso,
+                    end: seleccion.endIso,
+                    extendedProps: {
+                        descripcion: inputDescripcion.value.trim(),
+                        estado: 'programado',
+                        nombre: nombrePaciente
+                    }
+                })
+                citas.push({
+                    id: nuevaCitaBD.id,
+                    nombre_paciente: nombrePaciente,
+                    fecha: seleccion.fecha,
+                    hora_inicio: seleccion.horaInicio,
+                    hora_fin: seleccion.horaFin
+                });
+                modal.remove()
+                calendario.unselect()
+            }
+            catch (error) {
+                alert(`Validación fallida: ${error.message}`);
+            }
         })
     }
     function abrirModalEdicion(evento) {
