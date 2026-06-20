@@ -37,11 +37,22 @@ export async function guardarCita(psicologoId, fecha, horaInicio, horaFin, nombr
     const {data, error} = await supabase.from('citas').insert([nuevaCita]).select()
     return {data, error}
 }
+
 export async function eliminarCita(id) {
     const {error} = await supabase.from('citas').delete().eq('id', id)
     return {error}
 }
+
 export async function actualizarCita(id, datos) {
     const {error} = await supabase.from('citas').update(datos).eq('id', id)
     return {error}
+}
+
+export function buscarCitasPorNombre(citas, textoBusqueda) {
+    if (!citas || !Array.isArray(citas)) return [];
+    if (!textoBusqueda || textoBusqueda.trim() === '') return citas;
+    const textoLimpio = textoBusqueda.trim().toLowerCase();
+    return citas.filter(cita => 
+        cita.nombre_paciente.toLowerCase().includes(textoLimpio)
+    );
 }
