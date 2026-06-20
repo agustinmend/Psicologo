@@ -56,3 +56,11 @@ export function buscarCitasPorNombre(citas, textoBusqueda) {
         cita.nombre_paciente.toLowerCase().includes(textoLimpio)
     );
 }
+
+export function verificarSolapamientoMemoria(citas, fecha, horaInicio, horaFin) {
+    return citas.some(cita =>
+        cita.fecha === fecha &&
+        horaInicio < cita.hora_fin &&
+        horaFin > cita.hora_inicio
+    );
+}
