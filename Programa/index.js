@@ -231,8 +231,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     const btnBuscar = document.getElementById('btn-buscar')
     const listaResultados = document.getElementById('lista-resultados')
     btnBuscar.addEventListener('click', () => {
-        const texto = inputBusqueda.value.toLowerCase().trim()
-        const resultados = citas.filter(cita => cita.nombre_paciente.toLowerCase().includes(texto))
+        const texto = inputBusqueda.value
+        const resultados = buscarCitasPorNombre(citas, texto)
         renderizarResultados(resultados)
     })
     function renderizarResultados(resultados) {
