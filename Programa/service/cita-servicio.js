@@ -66,12 +66,17 @@ export function verificarSolapamientoMemoria(citas, fecha, horaInicio, horaFin) 
     );
 }
 
+const esNombreInvalido = (nombre) => !nombre || typeof nombre !== 'string' || nombre.trim() === '';
+const esHorarioInvalido = (inicio, fin) => inicio >= fin;
+
 export function validarDatosCita(fecha, horaInicio, horaFin, nombrePaciente) {
-    if (!nombrePaciente || nombrePaciente.trim() === '') {
+    if (esNombreInvalido(nombrePaciente)) {
         throw new Error('El nombre del paciente es obligatorio.');
     }
-    if (horaInicio >= horaFin) {
+    
+    if (esHorarioInvalido(horaInicio, horaFin)) {
         throw new Error('La hora de inicio debe ser anterior a la hora de fin.');
-    }    
+    }
+    
     return true;
 }
