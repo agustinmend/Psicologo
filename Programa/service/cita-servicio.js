@@ -58,6 +58,7 @@ export function buscarCitasPorNombre(citas, textoBusqueda) {
 }
 
 export function verificarSolapamientoMemoria(citas, fecha, horaInicio, horaFin) {
+    if (!citas || !Array.isArray(citas)) return false;
     return citas.some(cita =>
         cita.fecha === fecha &&
         horaInicio < cita.hora_fin &&
