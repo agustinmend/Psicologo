@@ -49,10 +49,7 @@ export async function actualizarCita(id, datos) {
 }
 
 export function buscarCitasPorNombre(citas, textoBusqueda) {
-    if (!citas || !Array.isArray(citas)) return [];
-    if (!textoBusqueda || textoBusqueda.trim() === '') return citas;
-    const textoLimpio = textoBusqueda.trim().toLowerCase();
     return citas.filter(cita => 
-        cita.nombre_paciente.toLowerCase().includes(textoLimpio)
+        cita.nombre_paciente.toLowerCase().includes(textoBusqueda.toLowerCase())
     );
 }
